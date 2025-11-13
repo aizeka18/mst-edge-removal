@@ -135,7 +135,7 @@ public class MSTEdgeRemoval {
 
     public static Edge findReplacementEdge(Graph graph, List<Edge> mst, Edge removedEdge,
                                            Map<Integer, List<Integer>> components) {
-        // Get the roots of the two components
+
         List<Integer> roots = new ArrayList<>(components.keySet());
         if (roots.size() != 2) {
             throw new IllegalStateException("Removing an edge should create exactly 2 components");
@@ -146,11 +146,11 @@ public class MSTEdgeRemoval {
         List<Integer> component1 = components.get(root1);
         List<Integer> component2 = components.get(root2);
 
-        // Find all edges that connect the two components
+
         List<Edge> candidateEdges = new ArrayList<>();
 
         for (Edge edge : graph.edges) {
-            // Skip edges that are already in MST (except the removed one)
+
             if (mst.contains(edge) && !edge.equals(removedEdge)) {
                 continue;
             }
@@ -164,18 +164,18 @@ public class MSTEdgeRemoval {
         }
 
         if (candidateEdges.isEmpty()) {
-            return null; // No replacement edge found
+            return null;
         }
 
-        // Return the minimum weight edge
+
         return Collections.min(candidateEdges, Comparator.comparingInt(e -> e.weight));
     }
 
     public static void main(String[] args) {
-        // Create a sample graph
+
         Graph graph = new Graph(6);
 
-        // Add edges (src, dest, weight)
+
         graph.addEdge(0, 1, 4);
         graph.addEdge(0, 2, 4);
         graph.addEdge(1, 2, 2);
@@ -194,16 +194,16 @@ public class MSTEdgeRemoval {
 
         System.out.println("=== MST Edge Removal Demonstration ===\n");
 
-        // Step 1: Build MST
+
         List<Edge> mst = kruskalMST(graph);
         System.out.println("1. Original MST:");
         printMST(mst);
 
-        // Step 2: Remove an edge (choose one from MST)
+
         Edge edgeToRemove = mst.get(2); // Remove the third edge
         System.out.println("2. Removing edge: " + edgeToRemove);
 
-        // Step 3: Show components after removal
+
         Map<Integer, List<Integer>> components = findComponents(mst, graph.vertices, edgeToRemove);
         System.out.println("3. Components after removal:");
         int componentNum = 1;
@@ -212,14 +212,14 @@ public class MSTEdgeRemoval {
             componentNum++;
         }
 
-        // Step 4: Find replacement edge
+
         System.out.println("\n4. Finding replacement edge...");
         Edge replacementEdge = findReplacementEdge(graph, mst, edgeToRemove, components);
 
         if (replacementEdge != null) {
             System.out.println("   Replacement edge found: " + replacementEdge);
 
-            // Create new MST
+
             List<Edge> newMST = new ArrayList<>(mst);
             newMST.remove(edgeToRemove);
             newMST.add(replacementEdge);
