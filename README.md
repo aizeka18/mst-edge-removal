@@ -20,11 +20,11 @@ This Java program demonstrates efficient edge removal from a Minimum Spanning Tr
 ### Option 1: Direct Execution
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone <https://github.com/aizeka18/mst-edge-removal.git>
 cd mst-edge-removal
 
 # Compile and run
 javac src/MSTEdgeRemoval.java
-java -cp src MSTEdgeRemoval#   m s t - e d g e - r e m o v a l 
+java -cp src MSTEdgeRemoval   m s t - e d g e - r e m o v a l 
  
  
